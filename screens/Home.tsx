@@ -1,4 +1,4 @@
-import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView, StatusBar, StyleSheet, Text, View } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { SliderBox } from 'react-native-image-slider-box';
 
@@ -39,7 +39,8 @@ const Home = (): JSX.Element => {
 
   return (
     <View className="flex-1 justify-center items-center">
-      <SliderBox images={moviesImages} />
+      <StatusBar translucent backgroundColor="transparent" />
+      <SliderBox images={moviesImages} autoplay circleLoop />
     </View>
   );
 };

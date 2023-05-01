@@ -11,20 +11,15 @@ type SectionProps = PropsWithChildren<{
 function App(): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
 
-  return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-    >
-      <StatusBar translucent backgroundColor="transparent" />
-      <Home />
-    </View>
-  );
+  return <Home />;
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
 
 export default App;
