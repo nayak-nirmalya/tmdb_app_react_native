@@ -38,13 +38,7 @@ const Home = (): JSX.Element => {
   }, []);
 
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-    >
+    <View className="flex-1 justify-center items-center">
       <SliderBox images={moviesImages} />
     </View>
   );
@@ -52,4 +46,10 @@ const Home = (): JSX.Element => {
 
 export default Home;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  sliderContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});

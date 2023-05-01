@@ -1,6 +1,6 @@
 import React from 'react';
 import type { PropsWithChildren } from 'react';
-import { StyleSheet, useColorScheme, View } from 'react-native';
+import { StatusBar, StyleSheet, useColorScheme, View } from 'react-native';
 
 import Home from './screens/Home';
 
@@ -19,6 +19,7 @@ function App(): JSX.Element {
         alignItems: 'center',
       }}
     >
+      <StatusBar translucent backgroundColor="transparent" />
       <Home />
     </View>
   );
