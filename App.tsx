@@ -1,25 +1,13 @@
-import axios from 'axios';
 import type { PropsWithChildren } from 'react';
 import React, { useEffect, useState } from 'react';
 import { SafeAreaView, StyleSheet, Text, useColorScheme } from 'react-native';
 
-import { TMDB_API_KEY } from '@env';
 import { Movie } from './types';
+import { getPopularMovies } from './services/services';
 
 type SectionProps = PropsWithChildren<{
   title: string;
 }>;
-
-export type MoviesResponse = {
-  results: Movie[];
-};
-
-const getPopularMovies = async (): Promise<Movie[]> => {
-  const response = await axios.get<MoviesResponse>(
-    `https://api.themoviedb.org/3/movie/popular?api_key=${TMDB_API_KEY}`
-  );
-  return response.data.results;
-};
 
 function App(): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
