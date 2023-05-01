@@ -5,6 +5,7 @@ import {
   StyleSheet,
   Text,
   View,
+  FlatList,
 } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { SliderBox } from 'react-native-image-slider-box';
@@ -21,6 +22,7 @@ const dimensions = Dimensions.get('screen');
 const Home = (): JSX.Element => {
   const [error, setError] = useState(false);
   const [moviesImages, setMoviesImages] = useState<string[]>([]);
+  const [popularMovies, setPopularMovies] = useState<Movie[]>([]);
 
   useEffect(() => {
     getUpcomingMovies()
@@ -39,7 +41,9 @@ const Home = (): JSX.Element => {
       });
 
     getPopularMovies()
-      .then((movies) => {})
+      .then((movies) => {
+        setPopularMovies(movies);
+      })
       .catch((err) => {
         console.error(err);
         setError(!!err);
@@ -47,15 +51,25 @@ const Home = (): JSX.Element => {
   }, []);
 
   return (
-    <View className="flex-1 justify-center items-center">
-      <StatusBar translucent backgroundColor="transparent" />
-      <SliderBox
-        images={moviesImages}
-        sliderBoxHeight={dimensions.height / 1.5}
-        autoplay
-        circleLoop
-      />
-    </View>
+    <>
+      <View className="flex-1 justify-center items-center">
+        <StatusBar translucent backgroundColor="transparent" />
+        <SliderBox
+          images={moviesImages}
+          dotStyle={{ height: 0 }}
+          sliderBoxHeight={dimensions.height / 1.5}
+          autoplay
+          circleLoop
+        />
+      </View>
+
+      <View style={styles.carousel}>
+        <FlatList
+          data={popularMovies}
+          renderItem={({ item }) => <Text>{item.title}</Text>}
+        />
+      </View>
+    </>
   );
 };
 
@@ -63,6 +77,11 @@ export default Home;
 
 const styles = StyleSheet.create({
   sliderContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  carousel: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
