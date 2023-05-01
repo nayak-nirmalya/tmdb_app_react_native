@@ -15,3 +15,10 @@ export const getPopularMovies = async (): Promise<Movie[]> => {
   );
   return response.data.results;
 };
+
+export const getUpcomingMovies = async (): Promise<Movie[]> => {
+  const response = await axios.get<MoviesResponse>(
+    `${API_URL}/movie/upcoming?api_key=${TMDB_API_KEY}`
+  );
+  return response.data.results;
+};

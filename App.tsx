@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { SafeAreaView, StyleSheet, Text, useColorScheme } from 'react-native';
 
 import { Movie } from './types';
-import { getPopularMovies } from './services/services';
+import { getPopularMovies, getUpcomingMovies } from './services/services';
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -16,7 +16,7 @@ function App(): JSX.Element {
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    getPopularMovies()
+    getUpcomingMovies()
       .then((movies) => {
         setMovie(movies[0]);
       })
