@@ -2,18 +2,35 @@ import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { SliderBox } from 'react-native-image-slider-box';
 
-import { getPopularTVs } from '../services/services';
+import {
+  getPopularMovies,
+  getPopularTVs,
+  getUpcomingMovies,
+} from '../services/services';
 import { Movie, TV } from '../types';
 
 const Home = (): JSX.Element => {
-  const [movie, setMovie] = useState<Movie | TV | null>(null);
   const [error, setError] = useState(false);
+  const [moviesImages, setMoviesImages] = useState<string[]>([]);
 
   useEffect(() => {
-    getPopularTVs()
+    getUpcomingMovies()
       .then((movies) => {
-        setMovie(movies[0]);
+        const moviesImagesArray: string[] = [];
+        movies.forEach((movie) => {
+          moviesImagesArray.push(
+            'https://image.tmdb.org/t/p/w500' + movie.poster_path
+          );
+        });
+        setMoviesImages(moviesImagesArray);
       })
+      .catch((err) => {
+        console.error(err);
+        setError(!!err);
+      });
+
+    getPopularMovies()
+      .then((movies) => {})
       .catch((err) => {
         console.error(err);
         setError(!!err);
@@ -21,9 +38,15 @@ const Home = (): JSX.Element => {
   }, []);
 
   return (
-    <SafeAreaView>
-      <Text className="text-black text-4xl">Hello World!</Text>
-    </SafeAreaView>
+    <View
+      style={{
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+    >
+      <SliderBox images={moviesImages} />
+    </View>
   );
 };
 
