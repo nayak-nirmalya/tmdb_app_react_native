@@ -1,4 +1,11 @@
-import { SafeAreaView, StatusBar, StyleSheet, Text, View } from 'react-native';
+import {
+  Dimensions,
+  SafeAreaView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { SliderBox } from 'react-native-image-slider-box';
 
@@ -8,6 +15,8 @@ import {
   getUpcomingMovies,
 } from '../services/services';
 import { Movie, TV } from '../types';
+
+const dimensions = Dimensions.get('screen');
 
 const Home = (): JSX.Element => {
   const [error, setError] = useState(false);
@@ -40,7 +49,12 @@ const Home = (): JSX.Element => {
   return (
     <View className="flex-1 justify-center items-center">
       <StatusBar translucent backgroundColor="transparent" />
-      <SliderBox images={moviesImages} autoplay circleLoop />
+      <SliderBox
+        images={moviesImages}
+        sliderBoxHeight={dimensions.height / 1.5}
+        autoplay
+        circleLoop
+      />
     </View>
   );
 };
