@@ -1,5 +1,6 @@
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import React, { useEffect, useState } from 'react';
+import { SliderBox } from 'react-native-image-slider-box';
 
 import { getPopularTVs } from '../services/services';
 import { Movie, TV } from '../types';
