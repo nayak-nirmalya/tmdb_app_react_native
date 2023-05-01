@@ -11,7 +11,6 @@ const Home = (): JSX.Element => {
   useEffect(() => {
     getPopularTVs()
       .then((movies) => {
-        console.log(movies[0]);
         setMovie(movies[0]);
       })
       .catch((err) => {
@@ -21,24 +20,8 @@ const Home = (): JSX.Element => {
   }, []);
 
   return (
-    <SafeAreaView className="h-full bg-white">
-      <Text className="text-black font-bold text-lg items-center mx-auto justify-center">
-        {movie?.original_title || movie?.original_name}
-      </Text>
-      <Text className="text-black font-bold text-lg items-center mx-auto justify-center">
-        {movie?.overview}
-      </Text>
-      <Text className="text-black font-bold text-lg items-center mx-auto justify-center">
-        {movie?.release_date || movie?.first_air_date}
-      </Text>
-      <Text className="text-black font-bold text-lg items-center mx-auto justify-center">
-        {movie?.vote_average}
-      </Text>
-      {error && (
-        <Text className="text-red-500 font-bold text-lg items-center mx-auto justify-center">
-          Error
-        </Text>
-      )}
+    <SafeAreaView>
+      <Text className="text-black text-4xl">Hello World!</Text>
     </SafeAreaView>
   );
 };
