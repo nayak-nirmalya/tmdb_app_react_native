@@ -2,8 +2,12 @@ import type { PropsWithChildren } from 'react';
 import React, { useEffect, useState } from 'react';
 import { SafeAreaView, StyleSheet, Text, useColorScheme } from 'react-native';
 
-import { Movie } from './types';
-import { getPopularMovies, getUpcomingMovies } from './services/services';
+import { Movie, TV } from './types';
+import {
+  getPopularMovies,
+  getPopularTVs,
+  getUpcomingMovies,
+} from './services/services';
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -12,12 +16,13 @@ type SectionProps = PropsWithChildren<{
 function App(): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
 
-  const [movie, setMovie] = useState<Movie | null>(null);
+  const [movie, setMovie] = useState<Movie | TV | null>(null);
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    getUpcomingMovies()
+    getPopularTVs()
       .then((movies) => {
+        console.log(movies[0]);
         setMovie(movies[0]);
       })
       .catch((err) => {
@@ -29,13 +34,13 @@ function App(): JSX.Element {
   return (
     <SafeAreaView className="h-full bg-white">
       <Text className="text-black font-bold text-lg items-center mx-auto justify-center">
-        {movie?.original_title}
+        {movie?.original_title || movie?.original_name}
       </Text>
       <Text className="text-black font-bold text-lg items-center mx-auto justify-center">
         {movie?.overview}
       </Text>
       <Text className="text-black font-bold text-lg items-center mx-auto justify-center">
-        {movie?.release_date}
+        {movie?.release_date || movie?.first_air_date}
       </Text>
       <Text className="text-black font-bold text-lg items-center mx-auto justify-center">
         {movie?.vote_average}
