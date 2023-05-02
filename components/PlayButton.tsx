@@ -1,14 +1,13 @@
-import { StyleSheet, Text, View, Pressable } from 'react-native';
+import { Pressable } from 'react-native';
 import React from 'react';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 const PlayButton = React.memo(() => {
   return (
-    <Pressable>
-      <Text>Languda Khandi</Text>
+    <Pressable className="items-center rounded-full p-2 bg-[#4481fc]">
+      <Icon name="caret-forward-outline" color="#fff" size={36} />
     </Pressable>
   );
 });
 
 export default PlayButton;
-
-const styles = StyleSheet.create({});

@@ -59,7 +59,7 @@ const Details = ({ route, navigation }: DetailsProps): JSX.Element => {
             }
           />
           <View style={styles.container}>
-            <View>
+            <View className="absolute z-10 -top-10 right-4">
               <PlayButton />
             </View>
 
