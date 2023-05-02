@@ -7,6 +7,10 @@ export type MoviesResponse = {
   results: Movie[];
 };
 
+export type MovieResponse = {
+  results: Movie;
+};
+
 export type TVResponse = {
   results: TV[];
 };
@@ -44,6 +48,13 @@ export const getDocumentaries = async (): Promise<Movie[]> => {
 export const getPopularTVs = async (): Promise<TV[]> => {
   const response = await axios.get<TVResponse>(
     `${API_URL}/tv/popular?api_key=${TMDB_API_KEY}`
+  );
+  return response.data.results;
+};
+
+export const getMovie = async (id: string): Promise<Movie> => {
+  const response = await axios.get<MovieResponse>(
+    `${API_URL}/movie/${id}?api_key=${TMDB_API_KEY}`
   );
   return response.data.results;
 };
