@@ -31,53 +31,38 @@ const Home = (): JSX.Element => {
   const [documentaries, setDocumentaries] = useState<Movie[]>([]);
   const [popularTVs, setPopularTVs] = useState<TV[]>([]);
 
+  const getData = () => {
+    return Promise.all([
+      getUpcomingMovies(),
+      getPopularMovies(),
+      getFamilyMovies(),
+      getDocumentaries(),
+      getPopularTVs(),
+    ]);
+  };
+
   useEffect(() => {
-    getUpcomingMovies()
-      .then((movies) => {
-        const moviesImagesArray: string[] = [];
-        movies.forEach((movie) => {
-          moviesImagesArray.push(
-            'https://image.tmdb.org/t/p/w500' + movie.poster_path
+    getData()
+      .then(
+        ([
+          upcomingMovies,
+          popularMovies,
+          familyMovies,
+          documentaries,
+          popularTVs,
+        ]) => {
+          setMoviesImages(
+            upcomingMovies.map(
+              (movie) => 'https://image.tmdb.org/t/p/w500' + movie.poster_path
+            )
           );
-        });
-        setMoviesImages(moviesImagesArray);
-      })
-      .catch((err) => {
-        console.error(err);
-        setError(!!err);
-      });
 
-    getPopularMovies()
-      .then((movies) => {
-        setPopularMovies(movies);
-      })
-      .catch((err) => {
-        console.error(err);
-        setError(!!err);
-      });
-
-    getFamilyMovies()
-      .then((movies) => {
-        setFamilyMovies(movies);
-      })
-      .catch((err) => {
-        console.error(err);
-        setError(!!err);
-      });
-
-    getDocumentaries()
-      .then((movies) => {
-        setDocumentaries(movies);
-      })
-      .catch((err) => {
-        console.error(err);
-        setError(!!err);
-      });
-
-    getPopularTVs()
-      .then((tvs) => {
-        setPopularTVs(tvs);
-      })
+          setPopularMovies(popularMovies);
+          setFamilyMovies(familyMovies);
+          setDocumentaries(documentaries);
+          setPopularTVs(popularTVs);
+        }
+      )
       .catch((err) => {
         console.error(err);
         setError(!!err);
