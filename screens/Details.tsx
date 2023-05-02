@@ -59,6 +59,16 @@ const Details = ({ route, navigation }: DetailsProps): JSX.Element => {
             <Text style={styles.title} className="text-black">
               {details?.title || 'Not A Movie!'}
             </Text>
+
+            {details?.genres && (
+              <View>
+                {details.genres.map((genre) => (
+                  <Text className="text-black" key={genre.id}>
+                    {genre.name}
+                  </Text>
+                ))}
+              </View>
+            )}
           </View>
         </ScrollView>
       )}
