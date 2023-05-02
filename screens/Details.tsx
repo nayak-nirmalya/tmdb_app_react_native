@@ -8,6 +8,7 @@ import {
   Dimensions,
 } from 'react-native';
 import StarRating from 'react-native-star-rating';
+import dateFormat from 'dateformat';
 import React, { useEffect, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
@@ -86,7 +87,8 @@ const Details = ({ route, navigation }: DetailsProps): JSX.Element => {
               {details?.overview}
             </Text>
             <Text className="text-black" style={styles.date}>
-              {'Release Date: ' + details?.release_date}
+              {'Release Date: ' +
+                dateFormat(details?.release_date, 'mmmm dS, yyyy')}
             </Text>
           </View>
         </ScrollView>
