@@ -1,10 +1,11 @@
 import React from 'react';
 import type { PropsWithChildren } from 'react';
-import { StatusBar, StyleSheet, useColorScheme, View } from 'react-native';
+import { StatusBar, StyleSheet, useColorScheme } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import Home from './screens/Home';
+import Details from './screens/Details';
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -12,6 +13,7 @@ type SectionProps = PropsWithChildren<{
 
 export type RootStackParamList = {
   Home: undefined;
+  Details: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -26,6 +28,7 @@ function App(): JSX.Element {
         initialRouteName="Home"
       >
         <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="Details" component={Details} />
       </Stack.Navigator>
     </NavigationContainer>
   );

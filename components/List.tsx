@@ -12,7 +12,9 @@ const List = React.memo(({ title, content }: ListProps): JSX.Element => {
   return (
     <View style={styles.list}>
       <View>
-        <Text style={styles.text}>{title}</Text>
+        <Text className="text-black mx-2" style={styles.text}>
+          {title}
+        </Text>
       </View>
       <View>
         <FlatList<Movie | TV>
