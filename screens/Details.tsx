@@ -73,9 +73,15 @@ const Details = ({ route, navigation }: DetailsProps): JSX.Element => {
                 ))}
               </View>
             )}
-            <Text className="text-black font-semibold">
-              {details?.vote_average}
-            </Text>
+            {details?.vote_average && (
+              <StarRating
+                disabled
+                maxStars={5}
+                fullStarColor="gold"
+                starSize={30}
+                rating={details.vote_average / 2}
+              />
+            )}
           </View>
         </ScrollView>
       )}
