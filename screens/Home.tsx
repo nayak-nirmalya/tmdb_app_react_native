@@ -16,6 +16,7 @@ import {
   getUpcomingMovies,
 } from '../services/services';
 import { Movie, TV } from '../types';
+import List from '../components/List';
 
 const dimensions = Dimensions.get('screen');
 
@@ -64,10 +65,7 @@ const Home = (): JSX.Element => {
       </View>
 
       <View style={styles.carousel}>
-        <FlatList
-          data={popularMovies}
-          renderItem={({ item }) => <Text>{item.title}</Text>}
-        />
+        <List title="Popular Movies" content={popularMovies} />
       </View>
     </>
   );
