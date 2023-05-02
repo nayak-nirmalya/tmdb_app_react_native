@@ -7,15 +7,18 @@ type CardProps = {
   item: Movie;
 };
 
+const placeholderImage = require('../assets/images/placeholder_image.png');
+
 const Card = React.memo(({ item }: CardProps): JSX.Element => {
   return (
     <TouchableOpacity style={styles.container}>
       <Image
         style={styles.image}
         resizeMode="cover"
-        source={{
-          uri: 'https://image.tmdb.org/t/p/w500' + item.poster_path,
-        }}
+        // source={{
+        //   uri: 'https://image.tmdb.org/t/p/w500' + item.poster_path,
+        // }}
+        source={placeholderImage}
       />
     </TouchableOpacity>
   );
