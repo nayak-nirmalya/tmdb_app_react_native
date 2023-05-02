@@ -1,11 +1,11 @@
 import { FlatList, StyleSheet, Text, View } from 'react-native';
 import React from 'react';
-import { Movie } from '../types';
+import { Movie, TV } from '../types';
 import Card from './Card';
 
 export type ListProps = {
   title: string;
-  content?: Movie[];
+  content?: Movie[] | TV[];
 };
 
 const List = React.memo(({ title, content }: ListProps): JSX.Element => {
@@ -15,7 +15,7 @@ const List = React.memo(({ title, content }: ListProps): JSX.Element => {
         <Text style={styles.text}>{title}</Text>
       </View>
       <View>
-        <FlatList
+        <FlatList<Movie | TV>
           horizontal
           data={content}
           renderItem={({ item }) => <Card key={item.id} item={item} />}

@@ -25,6 +25,7 @@ const Home = (): JSX.Element => {
   const [error, setError] = useState(false);
   const [moviesImages, setMoviesImages] = useState<string[]>([]);
   const [popularMovies, setPopularMovies] = useState<Movie[]>([]);
+  const [popularTVs, setPopularTVs] = useState<TV[]>([]);
 
   useEffect(() => {
     getUpcomingMovies()
@@ -45,6 +46,15 @@ const Home = (): JSX.Element => {
     getPopularMovies()
       .then((movies) => {
         setPopularMovies(movies);
+      })
+      .catch((err) => {
+        console.error(err);
+        setError(!!err);
+      });
+
+    getPopularTVs()
+      .then((tvs) => {
+        setPopularTVs(tvs);
       })
       .catch((err) => {
         console.error(err);
@@ -71,7 +81,7 @@ const Home = (): JSX.Element => {
         </View>
 
         <View style={styles.carousel}>
-          <List title="Random Movies" content={popularMovies} />
+          <List title="Popular TVs" content={popularTVs} />
         </View>
       </ScrollView>
     </>
