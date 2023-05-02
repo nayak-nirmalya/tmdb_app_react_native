@@ -27,6 +27,13 @@ export const getUpcomingMovies = async (): Promise<Movie[]> => {
   return response.data.results;
 };
 
+export const getFamilyMovies = async (): Promise<Movie[]> => {
+  const response = await axios.get<MoviesResponse>(
+    `${API_URL}/discover/movie?api_key=${TMDB_API_KEY}&with_genres=10751`
+  );
+  return response.data.results;
+};
+
 export const getPopularTVs = async (): Promise<TV[]> => {
   const response = await axios.get<TVResponse>(
     `${API_URL}/tv/popular?api_key=${TMDB_API_KEY}`
