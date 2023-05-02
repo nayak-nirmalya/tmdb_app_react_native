@@ -12,6 +12,7 @@ import React, { useEffect, useState } from 'react';
 import { SliderBox } from 'react-native-image-slider-box';
 
 import {
+  getDocumentaries,
   getFamilyMovies,
   getPopularMovies,
   getPopularTVs,
@@ -27,6 +28,7 @@ const Home = (): JSX.Element => {
   const [moviesImages, setMoviesImages] = useState<string[]>([]);
   const [popularMovies, setPopularMovies] = useState<Movie[]>([]);
   const [familyMovies, setFamilyMovies] = useState<Movie[]>([]);
+  const [documentaries, setDocumentaries] = useState<Movie[]>([]);
   const [popularTVs, setPopularTVs] = useState<TV[]>([]);
 
   useEffect(() => {
@@ -63,6 +65,15 @@ const Home = (): JSX.Element => {
         setError(!!err);
       });
 
+    getDocumentaries()
+      .then((movies) => {
+        setDocumentaries(movies);
+      })
+      .catch((err) => {
+        console.error(err);
+        setError(!!err);
+      });
+
     getPopularTVs()
       .then((tvs) => {
         setPopularTVs(tvs);
@@ -93,6 +104,10 @@ const Home = (): JSX.Element => {
 
         <View style={styles.carousel}>
           <List title="Family Movies" content={familyMovies} />
+        </View>
+
+        <View style={styles.carousel}>
+          <List title="Documentaries" content={documentaries} />
         </View>
 
         <View style={styles.carousel}>
