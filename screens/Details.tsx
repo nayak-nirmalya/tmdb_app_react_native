@@ -6,6 +6,7 @@ import {
   Image,
   ScrollView,
   Dimensions,
+  Modal,
 } from 'react-native';
 import StarRating from 'react-native-star-rating';
 import dateFormat from 'dateformat';
@@ -34,6 +35,7 @@ const Details = ({ route, navigation }: DetailsProps): JSX.Element => {
   const [details, setDetails] = useState<Movie>();
   const [error, setError] = useState<boolean>(false);
   const [loaded, setLoaded] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
 
   useEffect(() => {
     getMovie(movieId)
@@ -45,58 +47,62 @@ const Details = ({ route, navigation }: DetailsProps): JSX.Element => {
   return (
     <>
       {loaded && !error && (
-        <ScrollView>
-          <Image
-            style={styles.image}
-            resizeMode="cover"
-            source={
-              details?.poster_path
-                ? {
-                    uri:
-                      'https://image.tmdb.org/t/p/w500' + details.poster_path,
-                  }
-                : placeholderImage
-            }
-          />
-          <View style={styles.container}>
-            <View className="absolute z-10 -top-10 right-4">
-              <PlayButton />
-            </View>
-
-            <Text style={styles.title} className="text-black">
-              {details?.title || 'Not A Movie!'}
-            </Text>
-
-            {details?.genres && (
-              <View style={styles.genresContainer}>
-                {details.genres.map((genre) => (
-                  <Text
-                    className="text-black font-semibold mr-2"
-                    key={genre.id}
-                  >
-                    {genre.name}
-                  </Text>
-                ))}
+        <View>
+          <ScrollView>
+            <Image
+              style={styles.image}
+              resizeMode="cover"
+              source={
+                details?.poster_path
+                  ? {
+                      uri:
+                        'https://image.tmdb.org/t/p/w500' + details.poster_path,
+                    }
+                  : placeholderImage
+              }
+            />
+            <View style={styles.container}>
+              <View className="absolute z-10 -top-10 right-4">
+                <PlayButton handlePress={() => {}} />
               </View>
-            )}
-            {details?.vote_average && (
-              <StarRating
-                disabled
-                maxStars={5}
-                fullStarColor="gold"
-                starSize={30}
-                rating={details.vote_average / 2}
-              />
-            )}
-            <Text className="text-black text-justify" style={styles.overview}>
-              {details?.overview}
-            </Text>
-            <Text className="text-black" style={styles.date}>
-              {'Release Date: ' +
-                dateFormat(details?.release_date, 'mmmm dS, yyyy')}
-            </Text>
-          </View>
-        </ScrollView>
+
+              <Text style={styles.title} className="text-black">
+                {details?.title || 'Not A Movie!'}
+              </Text>
+
+              {details?.genres && (
+                <View style={styles.genresContainer}>
+                  {details.genres.map((genre) => (
+                    <Text
+                      className="text-black font-semibold mr-2"
+                      key={genre.id}
+                    >
+                      {genre.name}
+                    </Text>
+                  ))}
+                </View>
+              )}
+              {details?.vote_average && (
+                <StarRating
+                  disabled
+                  maxStars={5}
+                  fullStarColor="gold"
+                  starSize={30}
+                  rating={details.vote_average / 2}
+                />
+              )}
+              <Text className="text-black text-justify" style={styles.overview}>
+                {details?.overview}
+              </Text>
+              <Text className="text-black" style={styles.date}>
+                {'Release Date: ' +
+                  dateFormat(details?.release_date, 'mmmm dS, yyyy')}
+              </Text>
+            </View>
+          </ScrollView>
+
+          <Modal visible={modalVisible} animationType="slide"></Modal>
+        </View>
       )}
       {!loaded && (
         <ActivityIndicator
