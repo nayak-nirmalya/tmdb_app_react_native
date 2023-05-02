@@ -5,7 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import Home from './screens/Home';
-import Details from './screens/Details';
+import Details, { DetailsScreenProps } from './screens/Details';
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -13,7 +13,7 @@ type SectionProps = PropsWithChildren<{
 
 export type RootStackParamList = {
   Home: undefined;
-  Details: undefined;
+  Details: DetailsScreenProps;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();

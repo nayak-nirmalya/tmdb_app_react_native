@@ -16,7 +16,7 @@ const Card = React.memo(({ item }: CardProps): JSX.Element => {
   return (
     <TouchableOpacity
       style={styles.container}
-      onPress={() => navigation.navigate('Details')}
+      onPress={() => navigation.navigate('Details', { item })}
     >
       <Image
         style={styles.image}
