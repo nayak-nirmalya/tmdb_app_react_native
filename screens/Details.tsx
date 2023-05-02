@@ -7,6 +7,7 @@ import {
   ScrollView,
   Dimensions,
 } from 'react-native';
+import StarRating from 'react-native-star-rating';
 import React, { useEffect, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
@@ -72,6 +73,9 @@ const Details = ({ route, navigation }: DetailsProps): JSX.Element => {
                 ))}
               </View>
             )}
+            <Text className="text-black font-semibold">
+              {details?.vote_average}
+            </Text>
           </View>
         </ScrollView>
       )}
