@@ -64,7 +64,7 @@ const Home = (): JSX.Element => {
 
   return (
     <>
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <View className="flex-1 justify-center items-center">
           <StatusBar translucent backgroundColor="transparent" />
           <SliderBox
