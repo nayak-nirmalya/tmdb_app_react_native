@@ -63,19 +63,18 @@ const Home = (): JSX.Element => {
           setFamilyMovies(familyMoviesData);
           setDocumentaries(documentariesData);
           setPopularTVs(popularTVsData);
-
-          setLoaded(true);
         }
       )
       .catch((err) => {
         console.error(err);
         setError(!!err);
-      });
+      })
+      .finally(() => setLoaded(true));
   }, []);
 
   return (
     <>
-      {!loaded ? (
+      {loaded ? (
         <ScrollView showsVerticalScrollIndicator={false}>
           {moviesImages && (
             <View className="flex-1 justify-center items-center">
