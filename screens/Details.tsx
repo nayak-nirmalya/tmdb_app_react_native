@@ -61,9 +61,12 @@ const Details = ({ route, navigation }: DetailsProps): JSX.Element => {
             </Text>
 
             {details?.genres && (
-              <View>
+              <View style={styles.genresContainer}>
                 {details.genres.map((genre) => (
-                  <Text className="text-black" key={genre.id}>
+                  <Text
+                    className="text-black font-semibold mr-2"
+                    key={genre.id}
+                  >
                     {genre.name}
                   </Text>
                 ))}
@@ -100,5 +103,10 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginTop: 10,
     marginBottom: 10,
+  },
+  genresContainer: {
+    flexDirection: 'row',
+    marginTop: 20,
+    alignContent: 'center',
   },
 });
