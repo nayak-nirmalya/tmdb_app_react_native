@@ -13,10 +13,12 @@ const Error = React.memo(
   }: ErrorProps): JSX.Element => {
     return (
       <View style={styles.container}>
-        <Text className="text-lg" style={styles.text}>
+        <Text className="text-lg text-black" style={styles.text}>
           {errSubject}
         </Text>
-        <Text style={styles.text}>{errText}</Text>
+        <Text className="text-black" style={styles.text}>
+          {errText}
+        </Text>
       </View>
     );
   }
