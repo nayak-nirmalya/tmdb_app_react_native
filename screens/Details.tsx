@@ -17,6 +17,7 @@ import { Movie, TV } from '../types';
 import { RootStackParamList } from '../App';
 import Error from '../components/Error';
 import { getMovie } from '../services/services';
+import PlayButton from '../components/PlayButton';
 
 export type DetailsScreenProps = {
   movieId: string;
@@ -58,6 +59,10 @@ const Details = ({ route, navigation }: DetailsProps): JSX.Element => {
             }
           />
           <View style={styles.container}>
+            <View>
+              <PlayButton />
+            </View>
+
             <Text style={styles.title} className="text-black">
               {details?.title || 'Not A Movie!'}
             </Text>
