@@ -45,22 +45,22 @@ const Home = (): JSX.Element => {
     getData()
       .then(
         ([
-          upcomingMovies,
-          popularMovies,
-          familyMovies,
-          documentaries,
-          popularTVs,
+          upcomingMoviesData,
+          popularMoviesData,
+          familyMoviesData,
+          documentariesData,
+          popularTVsData,
         ]) => {
           setMoviesImages(
-            upcomingMovies.map(
+            upcomingMoviesData.map(
               (movie) => 'https://image.tmdb.org/t/p/w500' + movie.poster_path
             )
           );
 
-          setPopularMovies(popularMovies);
-          setFamilyMovies(familyMovies);
-          setDocumentaries(documentaries);
-          setPopularTVs(popularTVs);
+          setPopularMovies(popularMoviesData);
+          setFamilyMovies(familyMoviesData);
+          setDocumentaries(documentariesData);
+          setPopularTVs(popularTVsData);
         }
       )
       .catch((err) => {
@@ -72,38 +72,46 @@ const Home = (): JSX.Element => {
   return (
     <>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <View className="flex-1 justify-center items-center">
-          <StatusBar translucent backgroundColor="transparent" />
-          <SliderBox
-            images={moviesImages}
-            dotStyle={{ height: 0 }}
-            sliderBoxHeight={dimensions.height / 1.5}
-            autoplay
-            circleLoop
-          />
-        </View>
+        {moviesImages && (
+          <View className="flex-1 justify-center items-center">
+            <StatusBar translucent backgroundColor="transparent" />
+            <SliderBox
+              images={moviesImages}
+              dotStyle={{ height: 0 }}
+              sliderBoxHeight={dimensions.height / 1.5}
+              autoplay
+              circleLoop
+            />
+          </View>
+        )}
 
-        <View style={styles.carousel}>
-          <List title="Popular Movies" content={popularMovies} />
-        </View>
+        {popularMovies && (
+          <View style={styles.carousel}>
+            <List title="Popular Movies" content={popularMovies} />
+          </View>
+        )}
 
-        <View style={styles.carousel}>
-          <List title="Family Movies" content={familyMovies} />
-        </View>
+        {familyMovies && (
+          <View style={styles.carousel}>
+            <List title="Family Movies" content={familyMovies} />
+          </View>
+        )}
 
-        <View style={styles.carousel}>
-          <List title="Documentaries" content={documentaries} />
-        </View>
+        {documentaries && (
+          <View style={styles.carousel}>
+            <List title="Documentaries" content={documentaries} />
+          </View>
+        )}
 
-        <View style={styles.carousel}>
-          <List title="Popular TVs" content={popularTVs} />
-        </View>
+        {popularTVs && (
+          <View style={styles.carousel}>
+            <List title="Popular TVs" content={popularTVs} />
+          </View>
+        )}
       </ScrollView>
     </>
   );
 };
-
-export default Home;
 
 const styles = StyleSheet.create({
   sliderContainer: {
@@ -117,3 +125,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
+
+export default Home;
