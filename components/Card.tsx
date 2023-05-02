@@ -21,6 +21,14 @@ const Card = React.memo(({ item }: CardProps): JSX.Element => {
             : placeholderImage
         }
       />
+      {!item.poster_path && (
+        <Text
+          style={styles.movieName}
+          className="text-black font-semibold mt-4"
+        >
+          {item.title}
+        </Text>
+      )}
     </TouchableOpacity>
   );
 });
@@ -31,10 +39,17 @@ const styles = StyleSheet.create({
   container: {
     padding: 5,
     position: 'relative',
+    alignItems: 'center',
+    height: 200,
   },
   image: {
     height: 200,
     width: 120,
     borderRadius: 14,
+  },
+  movieName: {
+    position: 'absolute',
+    width: 100,
+    textAlign: 'center',
   },
 });
