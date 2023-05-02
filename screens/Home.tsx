@@ -20,11 +20,12 @@ import {
 } from '../services/services';
 import { Movie, TV } from '../types';
 import List from '../components/List';
+import Error from '../components/Error';
 
 const dimensions = Dimensions.get('screen');
 
 const Home = (): JSX.Element => {
-  const [error, setError] = useState(false);
+  const [error, setError] = useState(true);
   const [loaded, setLoaded] = useState(false);
 
   const [moviesImages, setMoviesImages] = useState<string[]>([]);
@@ -67,14 +68,14 @@ const Home = (): JSX.Element => {
       )
       .catch((err) => {
         console.error(err);
-        setError(!!err);
+        setError(true);
       })
       .finally(() => setLoaded(true));
   }, []);
 
   return (
     <>
-      {loaded ? (
+      {loaded && !error && (
         <ScrollView showsVerticalScrollIndicator={false}>
           {moviesImages && (
             <View className="flex-1 justify-center items-center">
@@ -113,13 +114,15 @@ const Home = (): JSX.Element => {
             </View>
           )}
         </ScrollView>
-      ) : (
+      )}
+      {!loaded && (
         <ActivityIndicator
           className="items-center justify-center my-auto"
           size="large"
           color="#00ff00"
         />
       )}
+      {error && <Error />}
     </>
   );
 };
