@@ -5,7 +5,7 @@ import {
   StyleSheet,
   Text,
   View,
-  FlatList,
+  ActivityIndicator,
   ScrollView,
 } from 'react-native';
 import React, { useEffect, useState } from 'react';
@@ -25,6 +25,8 @@ const dimensions = Dimensions.get('screen');
 
 const Home = (): JSX.Element => {
   const [error, setError] = useState(false);
+  const [loaded, setLoaded] = useState(false);
+
   const [moviesImages, setMoviesImages] = useState<string[]>([]);
   const [popularMovies, setPopularMovies] = useState<Movie[]>([]);
   const [familyMovies, setFamilyMovies] = useState<Movie[]>([]);
@@ -61,6 +63,8 @@ const Home = (): JSX.Element => {
           setFamilyMovies(familyMoviesData);
           setDocumentaries(documentariesData);
           setPopularTVs(popularTVsData);
+
+          setLoaded(true);
         }
       )
       .catch((err) => {
@@ -71,44 +75,52 @@ const Home = (): JSX.Element => {
 
   return (
     <>
-      <ScrollView showsVerticalScrollIndicator={false}>
-        {moviesImages && (
-          <View className="flex-1 justify-center items-center">
-            <StatusBar translucent backgroundColor="transparent" />
-            <SliderBox
-              images={moviesImages}
-              dotStyle={{ height: 0 }}
-              sliderBoxHeight={dimensions.height / 1.5}
-              autoplay
-              circleLoop
-            />
-          </View>
-        )}
+      {!loaded ? (
+        <ScrollView showsVerticalScrollIndicator={false}>
+          {moviesImages && (
+            <View className="flex-1 justify-center items-center">
+              <StatusBar translucent backgroundColor="transparent" />
+              <SliderBox
+                images={moviesImages}
+                dotStyle={{ height: 0 }}
+                sliderBoxHeight={dimensions.height / 1.5}
+                autoplay
+                circleLoop
+              />
+            </View>
+          )}
 
-        {popularMovies && (
-          <View style={styles.carousel}>
-            <List title="Popular Movies" content={popularMovies} />
-          </View>
-        )}
+          {popularMovies && (
+            <View style={styles.carousel}>
+              <List title="Popular Movies" content={popularMovies} />
+            </View>
+          )}
 
-        {familyMovies && (
-          <View style={styles.carousel}>
-            <List title="Family Movies" content={familyMovies} />
-          </View>
-        )}
+          {familyMovies && (
+            <View style={styles.carousel}>
+              <List title="Family Movies" content={familyMovies} />
+            </View>
+          )}
 
-        {documentaries && (
-          <View style={styles.carousel}>
-            <List title="Documentaries" content={documentaries} />
-          </View>
-        )}
+          {documentaries && (
+            <View style={styles.carousel}>
+              <List title="Documentaries" content={documentaries} />
+            </View>
+          )}
 
-        {popularTVs && (
-          <View style={styles.carousel}>
-            <List title="Popular TVs" content={popularTVs} />
-          </View>
-        )}
-      </ScrollView>
+          {popularTVs && (
+            <View style={styles.carousel}>
+              <List title="Popular TVs" content={popularTVs} />
+            </View>
+          )}
+        </ScrollView>
+      ) : (
+        <ActivityIndicator
+          className="items-center justify-center my-auto"
+          size="large"
+          color="#00ff00"
+        />
+      )}
     </>
   );
 };
