@@ -7,6 +7,7 @@ import {
   ScrollView,
   Dimensions,
   Modal,
+  Pressable,
 } from 'react-native';
 import StarRating from 'react-native-star-rating';
 import dateFormat from 'dateformat';
@@ -44,6 +45,10 @@ const Details = ({ route, navigation }: DetailsProps): JSX.Element => {
       .finally(() => setLoaded(true));
   }, [movieId]);
 
+  const videoShown = () => {
+    setModalVisible(!modalVisible);
+  };
+
   return (
     <>
       {loaded && !error && (
@@ -63,7 +68,7 @@ const Details = ({ route, navigation }: DetailsProps): JSX.Element => {
             />
             <View style={styles.container}>
               <View className="absolute z-10 -top-10 right-4">
-                <PlayButton handlePress={() => {}} />
+                <PlayButton handlePress={videoShown} />
               </View>
 
               <Text style={styles.title} className="text-black">
@@ -101,7 +106,22 @@ const Details = ({ route, navigation }: DetailsProps): JSX.Element => {
             </View>
           </ScrollView>
 
-          <Modal visible={modalVisible} animationType="slide"></Modal>
+          <Modal
+            statusBarTranslucent
+            visible={modalVisible}
+            animationType="slide"
+          >
+            <View className="flex-1 justify-center align-middle">
+              <Pressable
+                className="bg-[#4481fc] p-3 m-40 rounded-full"
+                onPress={videoShown}
+              >
+                <Text className="text-black font-semibold text-lg items-center mx-auto">
+                  Toggle
+                </Text>
+              </Pressable>
+            </View>
+          </Modal>
         </View>
       )}
       {!loaded && (
