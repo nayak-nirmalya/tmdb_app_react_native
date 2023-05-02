@@ -13,6 +13,10 @@ export type Movie = {
   video: boolean;
   vote_average: number;
   vote_count: number;
+  status?: string;
+  homepage?: string;
+  budget?: number;
+  genres?: { id: number; name: string }[];
 };
 
 export type TV = {

@@ -7,10 +7,6 @@ export type MoviesResponse = {
   results: Movie[];
 };
 
-export type MovieResponse = {
-  results: Movie;
-};
-
 export type TVResponse = {
   results: TV[];
 };
@@ -52,9 +48,9 @@ export const getPopularTVs = async (): Promise<TV[]> => {
   return response.data.results;
 };
 
-export const getMovie = async (id: string): Promise<Movie> => {
-  const response = await axios.get<MovieResponse>(
+export const getMovie = async (id: string) => {
+  const response = await axios.get<Movie>(
     `${API_URL}/movie/${id}?api_key=${TMDB_API_KEY}`
   );
-  return response.data.results;
+  return response.data;
 };
