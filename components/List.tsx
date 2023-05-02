@@ -1,24 +1,39 @@
 import { FlatList, StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import { Movie } from '../types';
+import Card from './Card';
 
 export type ListProps = {
   title: string;
   content?: Movie[];
 };
 
-const List = ({ title, content }: ListProps) => {
+const List = React.memo(({ title, content }: ListProps): JSX.Element => {
   return (
-    <View>
-      <FlatList
-        horizontal
-        data={content}
-        renderItem={({ item }) => <Text>{item.title}</Text>}
-      />
+    <View style={styles.list}>
+      <View>
+        <Text style={styles.text}>{title}</Text>
+      </View>
+      <View>
+        <FlatList
+          horizontal
+          data={content}
+          renderItem={({ item }) => <Card key={item.id} item={item} />}
+        />
+      </View>
     </View>
   );
-};
+});
 
 export default List;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  list: {
+    marginTop: 25,
+  },
+  text: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    paddingBottom: 20,
+  },
+});
