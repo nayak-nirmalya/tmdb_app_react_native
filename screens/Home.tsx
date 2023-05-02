@@ -25,7 +25,7 @@ import Error from '../components/Error';
 const dimensions = Dimensions.get('screen');
 
 const Home = (): JSX.Element => {
-  const [error, setError] = useState(true);
+  const [error, setError] = useState(false);
   const [loaded, setLoaded] = useState(false);
 
   const [moviesImages, setMoviesImages] = useState<string[]>([]);
