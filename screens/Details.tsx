@@ -55,7 +55,11 @@ const Details = ({ route, navigation }: DetailsProps): JSX.Element => {
                 : placeholderImage
             }
           />
-          <Text className="text-black">{details?.title || 'Not A Movie!'}</Text>
+          <View style={styles.container}>
+            <Text style={styles.title} className="text-black">
+              {details?.title || 'Not A Movie!'}
+            </Text>
+          </View>
         </ScrollView>
       )}
       {!loaded && (
@@ -73,7 +77,18 @@ const Details = ({ route, navigation }: DetailsProps): JSX.Element => {
 export default Details;
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   image: {
     height: Height / 2,
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginTop: 10,
+    marginBottom: 10,
   },
 });
