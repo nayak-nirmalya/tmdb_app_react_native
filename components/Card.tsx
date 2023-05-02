@@ -15,10 +15,11 @@ const Card = React.memo(({ item }: CardProps): JSX.Element => {
       <Image
         style={styles.image}
         resizeMode="cover"
-        // source={{
-        //   uri: 'https://image.tmdb.org/t/p/w500' + item.poster_path,
-        // }}
-        source={placeholderImage}
+        source={
+          item.poster_path
+            ? { uri: 'https://image.tmdb.org/t/p/w500' + item.poster_path }
+            : placeholderImage
+        }
       />
     </TouchableOpacity>
   );
