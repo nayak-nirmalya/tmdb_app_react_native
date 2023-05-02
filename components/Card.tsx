@@ -9,7 +9,7 @@ type CardProps = {
 
 const Card = React.memo(({ item }: CardProps): JSX.Element => {
   return (
-    <TouchableOpacity>
+    <TouchableOpacity style={styles.container}>
       <Text>{item.original_language}</Text>
     </TouchableOpacity>
   );
@@ -17,4 +17,9 @@ const Card = React.memo(({ item }: CardProps): JSX.Element => {
 
 export default Card;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    padding: 5,
+    position: 'relative',
+  },
+});
