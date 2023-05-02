@@ -2,6 +2,7 @@ import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
 import React from 'react';
 
 import { Movie, TV } from '../types';
+import { useNavigation } from '@react-navigation/native';
 
 type CardProps = {
   item: Movie | TV;
@@ -10,8 +11,13 @@ type CardProps = {
 const placeholderImage = require('../assets/images/placeholder_image.png');
 
 const Card = React.memo(({ item }: CardProps): JSX.Element => {
+  const navigation = useNavigation();
+
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity
+      style={styles.container}
+      onPress={() => navigation.navigate('Details')}
+    >
       <Image
         style={styles.image}
         resizeMode="cover"

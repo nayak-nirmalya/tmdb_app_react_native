@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { SliderBox } from 'react-native-image-slider-box';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 import {
   getDocumentaries,
@@ -21,10 +22,13 @@ import {
 import { Movie, TV } from '../types';
 import List from '../components/List';
 import Error from '../components/Error';
+import { RootStackParamList } from '../App';
 
 const dimensions = Dimensions.get('screen');
 
-const Home = (): JSX.Element => {
+const Home = ({
+  navigation,
+}: NativeStackScreenProps<RootStackParamList, 'Home'>): JSX.Element => {
   const [error, setError] = useState(false);
   const [loaded, setLoaded] = useState(false);
 
