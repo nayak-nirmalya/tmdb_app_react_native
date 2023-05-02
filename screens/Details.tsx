@@ -12,6 +12,7 @@ import {
 import StarRating from 'react-native-star-rating';
 import dateFormat from 'dateformat';
 import React, { useEffect, useState } from 'react';
+import VideoPlayer from 'react-native-video-controls';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
@@ -112,14 +113,18 @@ const Details = ({ route, navigation }: DetailsProps): JSX.Element => {
             animationType="slide"
           >
             <View className="flex-1 justify-center align-middle">
-              <Pressable
+              {/* <Pressable
                 className="bg-[#4481fc] p-3 m-40 rounded-full"
                 onPress={videoShown}
               >
                 <Text className="text-black font-semibold text-lg items-center mx-auto">
                   Toggle
                 </Text>
-              </Pressable>
+              </Pressable> */}
+              <VideoPlayer
+                source={{ uri: 'https://vjs.zencdn.net/v/oceans.mp4' }}
+                // navigator={this.props.navigator}
+              />
             </View>
           </Modal>
         </View>
