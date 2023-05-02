@@ -6,6 +6,7 @@ import {
   Text,
   View,
   FlatList,
+  ScrollView,
 } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { SliderBox } from 'react-native-image-slider-box';
@@ -53,20 +54,26 @@ const Home = (): JSX.Element => {
 
   return (
     <>
-      <View className="flex-1 justify-center items-center">
-        <StatusBar translucent backgroundColor="transparent" />
-        <SliderBox
-          images={moviesImages}
-          dotStyle={{ height: 0 }}
-          sliderBoxHeight={dimensions.height / 1.5}
-          autoplay
-          circleLoop
-        />
-      </View>
+      <ScrollView>
+        <View className="flex-1 justify-center items-center">
+          <StatusBar translucent backgroundColor="transparent" />
+          <SliderBox
+            images={moviesImages}
+            dotStyle={{ height: 0 }}
+            sliderBoxHeight={dimensions.height / 1.5}
+            autoplay
+            circleLoop
+          />
+        </View>
 
-      <View style={styles.carousel}>
-        <List title="Popular Movies" content={popularMovies} />
-      </View>
+        <View style={styles.carousel}>
+          <List title="Popular Movies" content={popularMovies} />
+        </View>
+
+        <View style={styles.carousel}>
+          <List title="Random Movies" content={popularMovies} />
+        </View>
+      </ScrollView>
     </>
   );
 };
