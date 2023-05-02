@@ -82,6 +82,12 @@ const Details = ({ route, navigation }: DetailsProps): JSX.Element => {
                 rating={details.vote_average / 2}
               />
             )}
+            <Text className="text-black text-justify" style={styles.overview}>
+              {details?.overview}
+            </Text>
+            <Text className="text-black" style={styles.date}>
+              {'Release Date: ' + details?.release_date}
+            </Text>
           </View>
         </ScrollView>
       )}
@@ -117,6 +123,11 @@ const styles = StyleSheet.create({
   genresContainer: {
     flexDirection: 'row',
     marginTop: 20,
+    marginBottom: 20,
     alignContent: 'center',
   },
+  overview: {
+    padding: 15,
+  },
+  date: { fontWeight: 'bold' },
 });
