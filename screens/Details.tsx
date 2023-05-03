@@ -123,7 +123,7 @@ const Details = ({ route, navigation }: DetailsProps): JSX.Element => {
               </Pressable> */}
               <VideoPlayer
                 source={{ uri: 'https://vjs.zencdn.net/v/oceans.mp4' }}
-                // navigator={this.props.navigator}
+                onBack={() => videoShown()}
               />
             </View>
           </Modal>
