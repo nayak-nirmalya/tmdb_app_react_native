@@ -32,8 +32,8 @@ const Height = Dimensions.get('screen').height;
 const Details = ({ route, navigation }: DetailsProps): JSX.Element => {
   const { id } = route.params;
 
-  const [movieDetails, setMovieDetails] = useState<Movie>();
-  const [tvDetails, setTvDetails] = useState<TV>();
+  const [movieDetails, setMovieDetails] = useState<Movie | null>();
+  const [tvDetails, setTvDetails] = useState<TV | null>();
   const [error, setError] = useState<boolean>(false);
   const [loaded, setLoaded] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
@@ -52,6 +52,11 @@ const Details = ({ route, navigation }: DetailsProps): JSX.Element => {
       results[0]
         ? setMovieDetails(results[0] as Movie)
         : setTvDetails(results[1] as TV);
+
+      if (results[0] && results[1]) {
+        setMovieDetails(results[0] as Movie);
+        setTvDetails(null);
+      }
 
       setLoaded(true);
     })();

@@ -38,22 +38,23 @@ const Search = (): JSX.Element => {
   return (
     <>
       <SafeAreaView>
-        <View className="mt-12 flex-row items-center">
+        <View className="mt-16 flex-row">
           <View style={styles.form} className="pb-4">
             <TextInput
               className="rounded-lg px-2 mx-3"
               value={searchText}
               onChangeText={setSearchText}
+              onSubmitEditing={() => onSubmit(searchText)}
               style={styles.input}
               placeholder="Search Movie / TV Show"
             />
           </View>
 
           <TouchableOpacity
-            className="mr-3"
+            className="mr-3 mt-2"
             onPress={() => onSubmit(searchText)}
           >
-            <Icon name="search-outline" size={30} />
+            <Icon style={styles.icon} name="search-outline" size={34} />
           </TouchableOpacity>
         </View>
 
@@ -105,6 +106,7 @@ const styles = StyleSheet.create({
     flexBasis: 'auto',
     flexGrow: 1,
   },
+  icon: {},
   searchItems: {},
   empty: {},
 });
