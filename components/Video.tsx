@@ -1,17 +1,18 @@
-import { StyleSheet, Text, View } from 'react-native';
-import VideoPlayer from 'react-native-video-controls';
 import React from 'react';
+import VideoPlayer from 'react-native-video-controls';
 
-const Video = () => {
+type VideoProps = {
+  videoShown: () => void;
+};
+
+const Video = ({ videoShown }: VideoProps) => {
   return (
     <VideoPlayer
       source={{ uri: 'https://vjs.zencdn.net/v/oceans.mp4' }}
-      onBack={() => videoShown()}
-      navigator={navigation}
+      onBack={videoShown}
+      onEnd={videoShown}
     />
   );
 };
 
 export default Video;
-
-const styles = StyleSheet.create({});

@@ -21,6 +21,7 @@ import { RootStackParamList } from '../App';
 import Error from '../components/Error';
 import { getMovie } from '../services/services';
 import PlayButton from '../components/PlayButton';
+import Video from '../components/Video';
 
 export type DetailsScreenProps = {
   movieId: string;
@@ -112,7 +113,9 @@ const Details = ({ route, navigation }: DetailsProps): JSX.Element => {
             visible={modalVisible}
             animationType="slide"
           >
-            <View className="flex-1 justify-center align-middle"></View>
+            <View className="flex-1 justify-center align-middle">
+              <Video videoShown={videoShown} />
+            </View>
           </Modal>
         </View>
       )}
