@@ -17,9 +17,7 @@ const Card = React.memo(({ item }: CardProps): JSX.Element => {
     <TouchableOpacity
       className="mb-2"
       style={styles.container}
-      onPress={() =>
-        navigation.navigate('Details', { movieId: item.id.toString() })
-      }
+      onPress={() => navigation.navigate('Details', { id: item.id.toString() })}
     >
       <Image
         style={styles.image}

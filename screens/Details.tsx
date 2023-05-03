@@ -7,13 +7,10 @@ import {
   ScrollView,
   Dimensions,
   Modal,
-  Pressable,
 } from 'react-native';
 import StarRating from 'react-native-star-rating';
 import dateFormat from 'dateformat';
 import React, { useEffect, useState } from 'react';
-
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 import { Movie, TV } from '../types';
@@ -24,7 +21,7 @@ import PlayButton from '../components/PlayButton';
 import Video from '../components/Video';
 
 export type DetailsScreenProps = {
-  movieId: string;
+  id: string;
 };
 
 type DetailsProps = NativeStackScreenProps<RootStackParamList, 'Details'>;
@@ -33,19 +30,32 @@ const placeholderImage = require('../assets/images/placeholder_image.png');
 const Height = Dimensions.get('screen').height;
 
 const Details = ({ route, navigation }: DetailsProps): JSX.Element => {
-  const { movieId } = route.params;
+  const { id } = route.params;
 
-  const [details, setDetails] = useState<Movie>();
+  const [movieDetails, setMovieDetails] = useState<Movie>();
+  const [tvDetails, setTvDetails] = useState<TV>();
   const [error, setError] = useState<boolean>(false);
   const [loaded, setLoaded] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
 
   useEffect(() => {
-    getMovieOrTvById(movieId, 'movie')
-      .then((data) => setDetails(data as Movie))
-      .catch(() => setError(true))
-      .finally(() => setLoaded(true));
-  }, [movieId]);
+    const promises = [
+      getMovieOrTvById(id, 'movie').catch(() => null),
+      getMovieOrTvById(id, 'tv').catch(() => null),
+    ];
+
+    (async () => {
+      const results = await Promise.all(promises);
+
+      if (!results[0] && !results[1]) setError(true);
+
+      results[0]
+        ? setMovieDetails(results[0] as Movie)
+        : setTvDetails(results[1] as TV);
+
+      setLoaded(true);
+    })();
+  }, [id]);
 
   const videoShown = () => {
     setModalVisible(!modalVisible);
@@ -60,10 +70,17 @@ const Details = ({ route, navigation }: DetailsProps): JSX.Element => {
               style={styles.image}
               resizeMode="cover"
               source={
-                details?.poster_path
+                movieDetails?.poster_path
                   ? {
                       uri:
-                        'https://image.tmdb.org/t/p/w500' + details.poster_path,
+                        'https://image.tmdb.org/t/p/w500' +
+                        movieDetails.poster_path,
+                    }
+                  : tvDetails?.poster_path
+                  ? {
+                      uri:
+                        'https://image.tmdb.org/t/p/w500' +
+                        tvDetails.poster_path,
                     }
                   : placeholderImage
               }
@@ -74,12 +91,12 @@ const Details = ({ route, navigation }: DetailsProps): JSX.Element => {
               </View>
 
               <Text style={styles.title} className="text-black">
-                {details?.title || 'Not A Movie!'}
+                {movieDetails?.title || tvDetails?.original_name}
               </Text>
 
-              {details?.genres && (
+              {movieDetails?.genres && (
                 <View style={styles.genresContainer}>
-                  {details.genres.map((genre) => (
+                  {movieDetails.genres?.map((genre) => (
                     <Text
                       className="text-black font-semibold mr-2"
                       key={genre.id}
@@ -89,21 +106,52 @@ const Details = ({ route, navigation }: DetailsProps): JSX.Element => {
                   ))}
                 </View>
               )}
-              {details?.vote_average && (
+
+              {tvDetails?.genres && (
+                <View style={styles.genresContainer}>
+                  {tvDetails.genres?.map((genre) => (
+                    <Text
+                      className="text-black font-semibold mr-2"
+                      key={genre.id}
+                    >
+                      {genre.name}
+                    </Text>
+                  ))}
+                </View>
+              )}
+
+              {movieDetails?.vote_average && (
                 <StarRating
                   disabled
                   maxStars={5}
                   fullStarColor="gold"
                   starSize={30}
-                  rating={details.vote_average / 2}
+                  rating={movieDetails.vote_average / 2}
                 />
               )}
+
+              {tvDetails?.vote_average && (
+                <StarRating
+                  disabled
+                  maxStars={5}
+                  fullStarColor="gold"
+                  starSize={30}
+                  rating={tvDetails.vote_average / 2}
+                />
+              )}
+
               <Text className="text-black text-justify" style={styles.overview}>
-                {details?.overview}
+                {movieDetails?.overview || tvDetails?.overview}
               </Text>
-              <Text className="text-black" style={styles.date}>
-                {'Release Date: ' +
-                  dateFormat(details?.release_date, 'mmmm dS, yyyy')}
+
+              <Text className="text-black pb-4" style={styles.date}>
+                {movieDetails &&
+                  'Release Date: ' +
+                    dateFormat(movieDetails?.release_date, 'mmmm dS, yyyy')}
+
+                {tvDetails &&
+                  'First Air Date: ' +
+                    dateFormat(tvDetails?.first_air_date, 'mmmm dS, yyyy')}
               </Text>
             </View>
           </ScrollView>
@@ -127,7 +175,7 @@ const Details = ({ route, navigation }: DetailsProps): JSX.Element => {
           color="#00ff00"
         />
       )}
-      {error && <Error errText="No Movie Exists with Given ID!" />}
+      {error && <Error errText="No Such Movie or TV Shows Exists!" />}
     </>
   );
 };
@@ -141,7 +189,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   image: {
-    height: Height / 2,
+    height: Height * (2 / 3),
   },
   title: {
     fontSize: 24,

@@ -33,4 +33,5 @@ export type TV = {
   vote_count: number;
   name: string;
   original_name: string;
+  genres?: { id: number; name: string }[];
 };
