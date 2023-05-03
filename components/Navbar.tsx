@@ -14,13 +14,13 @@ const Navbar = React.memo(({ main = false }: NavbarProps) => {
   return (
     <SafeAreaView>
       {main ? (
-        <View>
+        <View className="flex-1 justify-between flex-row p-2 items-center align-middle">
           <Image
             className="w-8 h-6"
             source={require('../assets/images/tmdb_logo.png')}
           />
-          <TouchableOpacity onPress={() => navigation.goBack()}>
-            <Icon name="search-outline" size={40} color="#fff" />
+          <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+            <Icon name="search-outline" size={30} color="#fff" />
           </TouchableOpacity>
         </View>
       ) : (
