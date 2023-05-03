@@ -16,6 +16,7 @@ import { RootStackParamList } from '../App';
 import { Movie, TV } from '../types';
 import { searchMovieOrTV } from '../services/services';
 import Card from '../components/Card';
+import Error from '../components/Error';
 
 export type SearchScreenProps = {
   searchResult?: Movie | TV;
@@ -43,7 +44,7 @@ const Search = ({ route, navigation }: SearchProps): JSX.Element => {
     <>
       <SafeAreaView>
         <View className="mt-12 flex-row items-center">
-          <View style={styles.form}>
+          <View style={styles.form} className="pb-4">
             <TextInput
               className="rounded-lg px-2 mx-3"
               value={searchText}
@@ -61,9 +62,10 @@ const Search = ({ route, navigation }: SearchProps): JSX.Element => {
           </TouchableOpacity>
         </View>
 
-        <View style={styles.searchItems}>
+        <View className="items-center" style={styles.searchItems}>
           {loaded && searchResult && searchResult.length > 0 && (
             <FlatList
+              showsVerticalScrollIndicator={false}
               numColumns={3}
               data={searchResult}
               renderItem={({ item }) => <Card item={item} />}
@@ -72,11 +74,25 @@ const Search = ({ route, navigation }: SearchProps): JSX.Element => {
           )}
 
           {loaded && searchResult && searchResult.length == 0 && (
-            <View>
-              <Text>No Matching Result.</Text>
-              <Text>Try Different Keyword.</Text>
+            <View className="items-center mx-auto mt-40">
+              <Text className="text-black font-semibold">
+                No Matching Result.
+              </Text>
+              <Text className="text-black font-semibold">
+                Try Different Keyword.
+              </Text>
             </View>
           )}
+
+          {!searchText && (
+            <View style={styles.empty}>
+              <Text className="text-black text-lg items-center mx-auto mt-40">
+                Type Something to Start Searching.
+              </Text>
+            </View>
+          )}
+
+          {error && <Error />}
         </View>
       </SafeAreaView>
     </>
@@ -96,4 +112,5 @@ const styles = StyleSheet.create({
     // paddingRight: 8,
   },
   searchItems: {},
+  empty: {},
 });
