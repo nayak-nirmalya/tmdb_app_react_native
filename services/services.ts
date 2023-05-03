@@ -11,6 +11,10 @@ export type TVResponse = {
   results: TV[];
 };
 
+export type MovieTVResult = {
+  results: TV[] | Movie[];
+};
+
 const API_URL = 'https://api.themoviedb.org/3';
 
 export const getPopularMovies = async (): Promise<Movie[]> => {
@@ -56,8 +60,8 @@ export const getMovie = async (id: string) => {
 };
 
 export const searchMovieOrTV = async (query: string, type: 'movie' | 'tv') => {
-  const response = await axios.get<Movie | TV>(
+  const response = await axios.get<MovieTVResult>(
     `${API_URL}/search/${type}?api_key=${TMDB_API_KEY}&query=${query}`
   );
-  return response.data;
+  return response.data.results;
 };
