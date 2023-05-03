@@ -2,12 +2,15 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { useNavigation } from '@react-navigation/native';
 
 const Navbar = React.memo(() => {
+  const navigation = useNavigation();
+
   return (
     <SafeAreaView>
       <View>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
           <Icon name="chevron-back" size={40} color="#fff" />
         </TouchableOpacity>
       </View>

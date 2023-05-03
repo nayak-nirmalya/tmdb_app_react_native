@@ -24,19 +24,23 @@ function App(): JSX.Element {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator
-        // screenOptions={{ headerShown: false }}
-        initialRouteName="Home"
-      >
+      <Stack.Navigator initialRouteName="Home">
         <Stack.Screen
           name="Home"
           component={Home}
           options={{
             headerTransparent: true,
-            header: () => <Navbar />,
+            headerShown: false,
           }}
         />
-        <Stack.Screen name="Details" component={Details} />
+        <Stack.Screen
+          options={{
+            headerTransparent: true,
+            header: () => <Navbar />,
+          }}
+          name="Details"
+          component={Details}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
