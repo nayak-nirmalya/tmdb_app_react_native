@@ -9,6 +9,7 @@ const Video = ({ videoShown }: VideoProps) => {
   return (
     <VideoPlayer
       source={{ uri: 'https://vjs.zencdn.net/v/oceans.mp4' }}
+      fullscreenOrientation="all"
       onBack={videoShown}
       onEnd={videoShown}
     />

@@ -112,6 +112,7 @@ const Details = ({ route, navigation }: DetailsProps): JSX.Element => {
             statusBarTranslucent
             visible={modalVisible}
             animationType="slide"
+            supportedOrientations={['landscape', 'portrait']}
           >
             <View className="flex-1 justify-center align-middle">
               <Video videoShown={videoShown} />
