@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Image, View, TouchableOpacity } from 'react-native';
 import React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -13,11 +13,17 @@ const Navbar = React.memo(({ main = false }: NavbarProps) => {
 
   return (
     <SafeAreaView>
-      <View>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Icon name="chevron-back" size={40} color="#fff" />
-        </TouchableOpacity>
-      </View>
+      {main ? (
+        <View>
+          <Image source={require('')} />
+        </View>
+      ) : (
+        <View>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Icon name="chevron-back" size={40} color="#fff" />
+          </TouchableOpacity>
+        </View>
+      )}
     </SafeAreaView>
   );
 });
