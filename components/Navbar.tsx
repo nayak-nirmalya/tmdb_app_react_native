@@ -4,6 +4,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
 
+import Colors from '../themes/Colors';
+
 type NavbarProps = {
   main?: boolean;
 };
@@ -20,13 +22,13 @@ const Navbar = React.memo(({ main = false }: NavbarProps) => {
             source={require('../assets/images/tmdb_logo.png')}
           />
           <TouchableOpacity onPress={() => navigation.navigate('Search')}>
-            <Icon name="search-outline" size={30} color="#fff" />
+            <Icon name="search-outline" size={30} color={Colors.white} />
           </TouchableOpacity>
         </View>
       ) : (
         <View>
           <TouchableOpacity onPress={() => navigation.goBack()}>
-            <Icon name="chevron-back" size={40} color="#fff" />
+            <Icon name="chevron-back" size={40} color={Colors.ligthGray} />
           </TouchableOpacity>
         </View>
       )}
