@@ -30,7 +30,7 @@ function App(): JSX.Element {
           component={Home}
           options={{
             headerTransparent: true,
-            headerShown: false,
+            header: () => <Navbar main />,
           }}
         />
         <Stack.Screen
