@@ -6,6 +6,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import Home from './screens/Home';
 import Details, { DetailsScreenProps } from './screens/Details';
+import Navbar from './components/Navbar';
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -24,7 +25,7 @@ function App(): JSX.Element {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        screenOptions={{ headerShown: false }}
+        // screenOptions={{ headerShown: false }}
         initialRouteName="Home"
       >
         <Stack.Screen
@@ -32,7 +33,7 @@ function App(): JSX.Element {
           component={Home}
           options={{
             headerTransparent: true,
-            // header: () =>
+            header: () => <Navbar />,
           }}
         />
         <Stack.Screen name="Details" component={Details} />
