@@ -162,7 +162,7 @@ const Details = ({ route, navigation }: DetailsProps): JSX.Element => {
           </ScrollView>
 
           <Modal
-            statusBarTranslucent
+            statusBarTranslucent={false}
             visible={modalVisible}
             animationType="slide"
             supportedOrientations={['landscape', 'portrait']}

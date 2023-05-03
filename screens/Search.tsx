@@ -6,6 +6,7 @@ import {
   TextInput,
   TouchableOpacity,
   Keyboard,
+  ScrollView,
 } from 'react-native';
 import React, { useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -36,62 +37,62 @@ const Search = (): JSX.Element => {
   };
 
   return (
-    <>
-      <SafeAreaView>
-        <View className="mt-16 flex-row">
-          <View style={styles.form} className="pb-4">
-            <TextInput
-              className="rounded-lg px-2 mx-3"
-              value={searchText}
-              onChangeText={setSearchText}
-              onSubmitEditing={() => onSubmit(searchText)}
-              style={styles.input}
-              placeholder="Search Movie / TV Show"
-            />
+    <SafeAreaView className="flex-1">
+      <View className="mt-16 flex-row">
+        <View style={styles.form} className="pb-4">
+          <TextInput
+            className="rounded-lg px-2 mx-3"
+            value={searchText}
+            onChangeText={setSearchText}
+            onSubmitEditing={() => onSubmit(searchText)}
+            style={styles.input}
+            placeholder="Search Movie / TV Show"
+          />
+        </View>
+
+        <TouchableOpacity
+          className="mr-3 mt-2"
+          onPress={() => onSubmit(searchText)}
+        >
+          <Icon style={styles.icon} name="search-outline" size={34} />
+        </TouchableOpacity>
+      </View>
+
+      <View className="items-center" style={styles.searchItems}>
+        {loaded && searchResult && searchResult.length > 0 && (
+          <FlatList
+            ListFooterComponent={<View />}
+            ListFooterComponentStyle={{ height: 160 }}
+            showsVerticalScrollIndicator={false}
+            numColumns={3}
+            data={searchResult}
+            renderItem={({ item }) => <Card item={item} />}
+            keyExtractor={(item) => item.id.toString()}
+          />
+        )}
+
+        {loaded && searchResult && searchResult.length == 0 && (
+          <View className="items-center mx-auto mt-40">
+            <Text className="text-black font-semibold">
+              No Matching Result.
+            </Text>
+            <Text className="text-black font-semibold">
+              Try Different Keyword.
+            </Text>
           </View>
+        )}
 
-          <TouchableOpacity
-            className="mr-3 mt-2"
-            onPress={() => onSubmit(searchText)}
-          >
-            <Icon style={styles.icon} name="search-outline" size={34} />
-          </TouchableOpacity>
-        </View>
+        {!searchText && (
+          <View style={styles.empty}>
+            <Text className="text-black text-lg items-center mx-auto mt-40">
+              Type Something to Start Searching.
+            </Text>
+          </View>
+        )}
 
-        <View className="items-center" style={styles.searchItems}>
-          {loaded && searchResult && searchResult.length > 0 && (
-            <FlatList
-              showsVerticalScrollIndicator={false}
-              numColumns={3}
-              data={searchResult}
-              renderItem={({ item }) => <Card item={item} />}
-              keyExtractor={(item) => item.id.toString()}
-            />
-          )}
-
-          {loaded && searchResult && searchResult.length == 0 && (
-            <View className="items-center mx-auto mt-40">
-              <Text className="text-black font-semibold">
-                No Matching Result.
-              </Text>
-              <Text className="text-black font-semibold">
-                Try Different Keyword.
-              </Text>
-            </View>
-          )}
-
-          {!searchText && (
-            <View style={styles.empty}>
-              <Text className="text-black text-lg items-center mx-auto mt-40">
-                Type Something to Start Searching.
-              </Text>
-            </View>
-          )}
-
-          {error && <Error />}
-        </View>
-      </SafeAreaView>
-    </>
+        {error && <Error />}
+      </View>
+    </SafeAreaView>
   );
 };
 
