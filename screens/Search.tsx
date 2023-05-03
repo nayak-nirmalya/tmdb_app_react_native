@@ -8,23 +8,15 @@ import {
   Keyboard,
 } from 'react-native';
 import React, { useState } from 'react';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import { RootStackParamList } from '../App';
 import { Movie, TV } from '../types';
 import { searchMovieOrTV } from '../services/services';
 import Card from '../components/Card';
 import Error from '../components/Error';
 
-export type SearchScreenProps = {
-  searchResult?: Movie | TV;
-};
-
-type SearchProps = NativeStackScreenProps<RootStackParamList, 'Search'>;
-
-const Search = ({ route, navigation }: SearchProps): JSX.Element => {
+const Search = (): JSX.Element => {
   const [searchText, setSearchText] = useState('');
   const [searchResult, setSearchResult] = useState<Movie[]>([]);
   const [error, setError] = useState(false);
@@ -109,7 +101,6 @@ const styles = StyleSheet.create({
   form: {
     flexBasis: 'auto',
     flexGrow: 1,
-    // paddingRight: 8,
   },
   searchItems: {},
   empty: {},
