@@ -18,13 +18,16 @@ import Error from '../components/Error';
 
 const Search = (): JSX.Element => {
   const [searchText, setSearchText] = useState('');
-  const [searchResult, setSearchResult] = useState<Movie[]>([]);
+  const [searchResult, setSearchResult] = useState<(Movie | TV)[]>([]);
   const [error, setError] = useState(false);
   const [loaded, setLoaded] = useState(false);
 
   const onSubmit = (query: string) => {
-    searchMovieOrTV(query, 'movie')
-      .then((result) => setSearchResult(result as Movie[]))
+    Promise.all([searchMovieOrTV(query, 'movie'), searchMovieOrTV(query, 'tv')])
+      .then(([movies, tvs]) => {
+        const data = [...movies, ...tvs];
+        setSearchResult(data);
+      })
       .catch((err) => setError(true))
       .finally(() => {
         setLoaded(true);
