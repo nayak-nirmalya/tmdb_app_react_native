@@ -15,7 +15,13 @@ const Navbar = React.memo(({ main = false }: NavbarProps) => {
     <SafeAreaView>
       {main ? (
         <View>
-          <Image source={require('')} />
+          <Image
+            className="w-8 h-6"
+            source={require('../assets/images/tmdb_logo.png')}
+          />
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Icon name="search-outline" size={40} color="#fff" />
+          </TouchableOpacity>
         </View>
       ) : (
         <View>
