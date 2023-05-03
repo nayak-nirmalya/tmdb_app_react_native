@@ -54,3 +54,10 @@ export const getMovie = async (id: string) => {
   );
   return response.data;
 };
+
+export const searchMovieOrTV = async (query: string, type: 'movie' | 'tv') => {
+  const response = await axios.get<Movie | TV>(
+    `${API_URL}/search/${type}?api_key=${TMDB_API_KEY}&query=${query}`
+  );
+  return response.data;
+};
