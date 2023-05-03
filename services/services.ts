@@ -52,9 +52,9 @@ export const getPopularTVs = async (): Promise<TV[]> => {
   return response.data.results;
 };
 
-export const getMovie = async (id: string) => {
-  const response = await axios.get<Movie>(
-    `${API_URL}/movie/${id}?api_key=${TMDB_API_KEY}`
+export const getMovieOrTvById = async (id: string, type: 'movie' | 'tv') => {
+  const response = await axios.get<Movie | TV>(
+    `${API_URL}/${type}/${id}?api_key=${TMDB_API_KEY}`
   );
   return response.data;
 };

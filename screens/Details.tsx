@@ -19,7 +19,7 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { Movie, TV } from '../types';
 import { RootStackParamList } from '../App';
 import Error from '../components/Error';
-import { getMovie } from '../services/services';
+import { getMovieOrTvById } from '../services/services';
 import PlayButton from '../components/PlayButton';
 import Video from '../components/Video';
 
@@ -41,8 +41,8 @@ const Details = ({ route, navigation }: DetailsProps): JSX.Element => {
   const [modalVisible, setModalVisible] = useState(false);
 
   useEffect(() => {
-    getMovie(movieId)
-      .then((data) => setDetails(data))
+    getMovieOrTvById(movieId, 'movie')
+      .then((data) => setDetails(data as Movie))
       .catch(() => setError(true))
       .finally(() => setLoaded(true));
   }, [movieId]);
