@@ -5,6 +5,7 @@ import { RootStackParamList } from '../App';
 import Details from '../screens/Details';
 import Home from '../screens/Home';
 import Navbar from './Navbar';
+import Search from '../screens/Search';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -26,6 +27,14 @@ const MainNavigation = React.memo(() => {
         }}
         name="Details"
         component={Details}
+      />
+      <Stack.Screen
+        options={{
+          headerTransparent: true,
+          header: () => <Navbar />,
+        }}
+        name="Search"
+        component={Search}
       />
     </Stack.Navigator>
   );

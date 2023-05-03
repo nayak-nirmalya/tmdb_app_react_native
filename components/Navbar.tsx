@@ -19,7 +19,7 @@ const Navbar = React.memo(({ main = false }: NavbarProps) => {
             className="w-8 h-6"
             source={require('../assets/images/tmdb_logo.png')}
           />
-          <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+          <TouchableOpacity onPress={() => navigation.navigate('Search', {})}>
             <Icon name="search-outline" size={30} color="#fff" />
           </TouchableOpacity>
         </View>
