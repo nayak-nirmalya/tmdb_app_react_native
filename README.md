@@ -10,6 +10,8 @@ Funcionalities:
 - Navigate back by cliking on Back Button on Header.
 - Click on Magnifying 🔍 Icon to Navigate to Search Page.
 - Type Movie / TV name to Search & click on Card to goto Details Page.
+- Press on Play Button to Open Video Player Modal & Play a Video.
+- Project is complete TypeSafe with proper Type Declaration.
 
 ### Prerequisites
 
