@@ -53,32 +53,40 @@ Android Build APK for this Project: `build_files\TMDB.apk`
 
 <div align='center'>
 
-### LogIn Screen
-
-<img src="readme_imgs/login_screen.jpg" width="360">
-
 ### Home Screen
 
-<img src="readme_imgs/home_screen.png" width="360">
+<img src="readme_imgs/home_page.png" width="360">
 
-### No More Profile
+### Home Screen Categories
 
-<img src="readme_imgs/no_profile.png" width="360">
+<img src="readme_imgs/home_page_categories.png" width="360">
 
-### User SetUp Modal
+### Search Result
 
-<img src="readme_imgs/modal_screen.png" width="360">
+<img src="readme_imgs/search_result.png" width="360">
 
-### Match Screen
+### Movie Details Screen
 
-<img src="readme_imgs/match_screen.png" width="360">
+<img src="readme_imgs/iron_man.png" width="360">
 
-### Chat List Screen
+### TV Details Screen
 
-<img src="readme_imgs/chat_screen.jpg" width="360">
+<img src="readme_imgs/tv_details_screen.png" width="360">
 
-### Message Screen
+### Video Player Modal
 
-<img src="readme_imgs/message_screen.png" width="360">
+<img src="readme_imgs/video_player.png" width="360">
+
+### Error Screen
+
+<img src="readme_imgs/error_screen.png" width="360">
+
+### App Icon
+
+<img src="readme_imgs/icon.png" width="240">
+
+### Material You Icon
+
+<img src="readme_imgs/installed.png" width="360">
 
 </div>
