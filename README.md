@@ -1,61 +1,51 @@
-# Tinder Clone (Expo)
+# TMDB
 
-This is a repository for Tinder Clone with React Native, Expo, TypeScript, TailWindCSS, Context API, Google Firebase, React Navigation.
+This is a repository for TMDB app that show popular, upcoming Movies & TV shows made with React Native, TypeScript, TailWindCSS, The Movie DB API, & React Navigation.
 
 Funcionalities:
 
-- Log In / Sign Up with Firebase Google OAuth.
-- Swipe Left/Right on Profiles to Pass/Match.
-- Add or Edit User Details.
-- Chat with Matched Users.
-- In-App Screen Navigation with Gesture.
-- Modern / Responsive Layout.
+- HomePage Carousel Shows Upcoming Movies.
+- Swipe Left/Right to View More Movies/Shows.
+- Click on Movie / TV card to goto Details Page.
+- Navigate back by cliking on Back Button on Header.
+- Click on Magnifying 🔍 Icon to Navigate to Search Page.
+- Type Movie / TV name to Search & click on Card to goto Details Page.
 
 ### Prerequisites
 
 **Node ^= 16**
 
-**Expo Go (from Mobile AppStore)**
-
 **Android Studio / XCode (Virtual Device Simulation)**
 
 **VS Code (IDE)**
 
-**EAS_CLI (To Build Application)**
-
 ### Cloning the repository
 
 ```shell
-git clone https://github.com/nayak-nirmalya/tinder-clone.git
+git clone https://github.com/nayak-nirmalya/tmdb_app_react_native.git
 ```
 
 ## Running Project
 
-To run your project, navigate to the root directory and run one of the following npm commands:
+To run your project, connect your physical device via usb and turn on USB Debuggin or start Android Virtual Device, then navigate to the root directory and run one of the following npm commands:
 
 ```shell
 cd uber-clone
 npm run android
-npm run ios # you need to use macOS to build the iOS project - use the Expo app if you need to do iOS development without a Mac
-npm expo start
+npm run ios
+npm run start
 ```
 
-If You Face Any Issue Run:
+To Build APK File, Run:
 
 ```shell
-expo start -c
+cd android
+./gradlew assembleRelease
 ```
 
-to Clear Expo Build Cache.
+Android Build APK can be found at: `android\app\build\outputs\apk\release\app-release.apk`
 
-This Expo Project Has Native dependencies, so to run you have to build first:
-
-```shell
-eas build --profile development --platform android
-```
-
-🤖 Open this link on your Android devices (or scan the QR code) to install the app:
-https://expo.dev/accounts/nirmalya_nayak/projects/tinder/builds/865c6309-244e-423a-83fe-7741aa96df14
+Android Build APK for this Project: `build_files\TMDB.apk`
 
 ## Screenshots
 
